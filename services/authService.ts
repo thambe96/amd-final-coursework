@@ -22,14 +22,32 @@ export const registerUser = async (
     email,
     password
   )
-  await updateProfile(userCredential.user, { displayName: fullname })
-  await setDoc(doc(db, "users", userCredential.user.uid), {
-    name: fullname,
-    role: "",
-    email,
-    createAt: new Date()
-  })
-  return userCredential.user
+
+  try {
+    await updateProfile(userCredential.user, { displayName: fullname })
+    console.log("profile updated successfully!")
+  } catch(err) {  
+    console.error("update profile faild", err)
+  }
+
+  try {
+    console.log("Attempting Firestore write...")
+    await setDoc(doc(db, "users", userCredential.user.uid), {
+      name: fullname,
+      role: "",
+      email,
+      createAt: Date.now()
+    })
+    console.log("Firestore write finished")
+
+
+    return userCredential.user
+
+  } catch(err) {
+    console.error("doc update faild", err)
+  }
+  
+
 }
 
 export const logoutUser = async () => {
