@@ -23,7 +23,7 @@ const Register = () => {
 
   const { showLoader, hideLoader, isLoading } = useLoader()
 
-  console.log(isLoading)
+  
 
   const handleRegister = async () => {
     if (!name || !email || !password || !conPassword || isLoading) {

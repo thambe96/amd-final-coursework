@@ -10,6 +10,7 @@ export default function App() {
             Welcome to Nativewind!
         </Text>
         <Link href={"/(auth)/register"} className='ml-10'>Register</ Link>
+        <Link href={"/(auth)/login"} className='ml-10'>Login</ Link>
     </View>
 
       
