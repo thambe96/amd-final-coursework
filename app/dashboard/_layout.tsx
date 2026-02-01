@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Tabs } from 'expo-router'
-
+import CustomHeader from '@/components/customHeader'
 
 const DashboardLayout = () => {
 
@@ -15,9 +15,10 @@ const DashboardLayout = () => {
 
   return (
     <Tabs
-        screenOptions={{
-            headerShown: false
-        }}
+   screenOptions={{
+        header: () => <CustomHeader />  
+      }}
+
     
     >
         {
