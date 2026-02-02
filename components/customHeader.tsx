@@ -1,18 +1,29 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native'
+import React, {useState} from 'react'
 import { Tabs } from 'expo-router'
 import { useRouter } from 'expo-router'
 import { logoutUser } from '../services/authService'
+import { Ionicons, MaterialIcons } from '@expo/vector-icons'
+
 
 
 
 const CustomHeader = () => {
   const router = useRouter()
+  const [query, setQuery] = useState("")
+
+  const handleSearch = () => {
+    console.log("Searching for:", query)
+    // You can hook this into Firestore or navigation later
+  }
+
 
   const handleLogout = async () => {
     await logoutUser()
     router.replace('/login')
   }
+
+
 
   return (
     <View style={styles.header}>
@@ -22,7 +33,14 @@ const CustomHeader = () => {
         style={styles.avatar}
       />
 
-      <Text style={styles.title}>Dashboard</Text>
+    <TextInput
+        style={styles.search}
+        placeholder="Search..."
+        value={query}
+        onChangeText={setQuery}
+        onSubmitEditing={handleSearch}
+    />
+
 
       {/* Logout button */}
       <TouchableOpacity onPress={handleLogout}>
@@ -34,13 +52,14 @@ const CustomHeader = () => {
 
 export default CustomHeader
 
+
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd'
@@ -50,13 +69,21 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20
   },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold'
+  search: {
+    flex: 1,
+    marginHorizontal: 8,
+    paddingHorizontal: 6,
+    paddingVertical: 6,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    backgroundColor: '#f9f9f9'
   },
-  logout: {
+   logout: {
     color: 'red',
     fontWeight: '600'
   }
+
 })
+
 
