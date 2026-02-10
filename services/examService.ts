@@ -5,8 +5,13 @@ import { db } from "./firebase"
 const auth = getAuth()
 const examsCollection = collection(db, "exams")
 
-// Add a new exam
-export const addExam = async (title: string, date: string, notes?: string) => {
+export const addExam = async (
+  title: string,
+  date: string,
+  notes?: string,
+  reminder: boolean = false,
+  priority: "low" | "medium" | "high" = "medium"
+) => {
   const user = auth.currentUser
   if (!user) throw new Error("User not authenticated.")
 
@@ -15,11 +20,12 @@ export const addExam = async (title: string, date: string, notes?: string) => {
     date,
     notes: notes || "",
     userId: user.uid,
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
+    reminder,
+    priority
   })
 }
 
-// Get all exams for current user
 export const getExams = async () => {
   const user = auth.currentUser
   if (!user) throw new Error("User not authenticated.")
