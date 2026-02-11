@@ -1,6 +1,7 @@
 import { getAuth } from "firebase/auth"
 import { addDoc, collection, getDocs, query, where, orderBy } from "firebase/firestore"
 import { db } from "./firebase"
+import { onSnapshot } from "firebase/firestore";
 
 const auth = getAuth()
 const examsCollection = collection(db, "exams")
@@ -42,3 +43,24 @@ export const getExams = async () => {
     ...docSnap.data()
   }))
 }
+
+
+export const subscribeToExams = (callback: (exams: any[]) => void) => {
+  const user = auth.currentUser;
+  if (!user) return () => {};
+
+  const q = query(
+    examsCollection,
+    where("userId", "==", user.uid),
+    orderBy("date", "asc")
+  );
+
+  // This returns an unsubscribe function to clean up the listener
+  return onSnapshot(q, (snapshot) => {
+    const exams = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    callback(exams);
+  });
+};
