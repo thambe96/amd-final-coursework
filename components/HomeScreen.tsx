@@ -82,22 +82,7 @@ const HomeScreen = ({ navigation }: any) => {
       )}
 
       {/* Quick Actions Grid */}
-      <Text style={styles.sectionTitle}>Quick Actions</Text>
-      <View style={styles.grid}>
-        <TouchableOpacity style={styles.actionCard} onPress={() => navigation.navigate('AddExam')}>
-          <View style={[styles.iconBox, { backgroundColor: '#E8EAF6' }]}>
-            <MaterialIcons name="add-task" size={28} color="#3F51B5" />
-          </View>
-          <Text style={styles.actionText}>Add Exam</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.actionCard} onPress={() => navigation.navigate('Exams')}>
-           <View style={[styles.iconBox, { backgroundColor: '#F3E5F5' }]}>
-            <MaterialIcons name="library-books" size={28} color="#9C27B0" />
-          </View>
-          <Text style={styles.actionText}>My Exams</Text>
-        </TouchableOpacity>
-      </View>
+   
 
       {/* Motivational Quote or Stat (Optional) */}
       <View style={styles.quoteContainer}>

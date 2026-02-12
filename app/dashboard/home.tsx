@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, TouchableOpacity, SafeAreaView } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, SafeAreaView, Image } from "react-native";
 import { subscribeToExams } from "../../services/examService";
 import { auth } from "../../services/firebase";
-import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router"; // If using Expo Router
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+
 
 const HomeScreen = () => {
   const [exams, setExams] = useState<any[]>([]);
@@ -64,10 +65,38 @@ const HomeScreen = () => {
   return (
     <SafeAreaView className="flex-1 bg-slate-50">
       {/* Header Section */}
-      <View className="p-6">
+      {/* <View className="p-6">
         <Text className="text-slate-400 font-medium">Welcome back,</Text>
         <Text className="text-2xl font-bold text-slate-800">{user?.displayName || "Student"}</Text>
+      </View> */}
+
+      <View className="flex-row justify-between items-center px-6 py-4 bg-white/50">
+        <View>
+          <Text className="text-slate-400 text-sm font-medium tracking-wide uppercase">
+            Hello,
+          </Text>
+          <Text className="text-slate-900 text-2xl font-bold">
+            {user?.displayName || 'Student'} 👋
+          </Text>
+        </View>
+
+        <TouchableOpacity 
+          onPress={() => router.push('../profile')} 
+          className="active:opacity-80"
+        >
+          <View className="p-1 rounded-full border-2 border-indigo-100 shadow-sm">
+            <Image 
+              source={{ uri: user?.photoURL || 'https://ui-avatars.com/api/?name=User+Name' }} 
+              className="w-12 h-12 rounded-full bg-slate-200"
+            />
+          </View>
+        </TouchableOpacity>
       </View>
+
+
+
+
+
 
       {/* Stats Summary */}
       <View className="flex-row px-6 mb-6 justify-between">
@@ -97,6 +126,10 @@ const HomeScreen = () => {
           </View>
         }
       />
+
+      
+
+
     </SafeAreaView>
   );
 };
