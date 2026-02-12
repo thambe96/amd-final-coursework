@@ -114,6 +114,12 @@ const HomeScreen = () => {
 
       <Text className="px-6 mb-4 text-slate-800 font-bold text-xl">Upcoming Exams</Text>
 
+      
+
+
+
+
+
       <FlatList
         data={exams}
         keyExtractor={(item) => item.id}
