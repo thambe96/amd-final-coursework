@@ -1,5 +1,5 @@
 import { getAuth } from "firebase/auth"
-import { addDoc, collection, getDocs, query, where, orderBy, onSnapshot, serverTimestamp} from "firebase/firestore"
+import { addDoc, collection, getDocs, query, where, orderBy, onSnapshot, serverTimestamp, doc, updateDoc, deleteDoc} from "firebase/firestore"
 import { db } from "./firebase"
 // import { onSnapshot } from "firebase/firestore";
 
@@ -90,4 +90,17 @@ export const addCardToSet = async (examId: string, setId: string, front: string,
     back,
     createdAt: serverTimestamp()
   });
+};
+
+
+// Update an existing exam
+export const updateExam = async (examId: string, updatedData: any) => {
+  const examRef = doc(db, "exams", examId);
+  return await updateDoc(examRef, updatedData);
+};
+
+// Delete an exam
+export const deleteExam = async (examId: string) => {
+  const examRef = doc(db, "exams", examId);
+  return await deleteDoc(examRef);
 };

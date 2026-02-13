@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { db } from '../services/firebase';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { Ionicons } from '@expo/vector-icons';
@@ -11,6 +11,7 @@ const StudyMode = () => {
   const [index, setIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const q = query(collection(db, "exams", examId, "flashcardSets", setId, "cards"), orderBy("createdAt", "asc"));
@@ -27,6 +28,22 @@ const StudyMode = () => {
 
   return (
     <View className="flex-1 bg-slate-50 p-6 pt-12">
+
+   
+        <View className="px-2 pt-2 pb-8 flex-row items-center">
+            <TouchableOpacity 
+                onPress={() => router.back()} 
+                className="bg-white p-3 rounded-2xl shadow-sm border border-slate-100"
+            >
+                <Ionicons name="chevron-back" size={24} color="#1e293b" />
+            </TouchableOpacity>
+            
+            <Text className="ml-4 text-slate-900 font-bold text-lg">Back to Sets</Text>
+        </View>
+
+
+
+
       {/* Progress Bar */}
       <View className="mb-8">
         <View className="flex-row justify-between mb-2">
