@@ -14,21 +14,21 @@ const ExamDetailsScreen = () => {
       icon: 'style', 
       color: 'bg-orange-50', 
       iconColor: '#f97316', 
-      route: '/createFlashcards' 
+      route: '/flashcardSets' 
     },
     { 
       name: 'Study Notes', 
       icon: 'note-add', 
       color: 'bg-blue-50', 
       iconColor: '#3b82f6', 
-      route: '/addNotes' 
+      route: '/studyNotes' 
     },
     { 
       name: 'Attachments', 
       icon: 'image', 
       color: 'bg-emerald-50', 
       iconColor: '#10b981', 
-      route: '/uploadImages' 
+      route: '/attachments' 
     },
   ];
 
