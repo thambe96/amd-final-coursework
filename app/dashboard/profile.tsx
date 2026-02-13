@@ -68,7 +68,9 @@ const ProfileScreen = () => {
         <View className="mt-8">
           <Text className="text-slate-400 font-bold uppercase text-[10px] tracking-widest mb-4 ml-2">Account Settings</Text>
           
-          <TouchableOpacity className="bg-white p-5 rounded-3xl mb-3 flex-row items-center justify-between border border-slate-50">
+          <TouchableOpacity 
+            onPress={() => router.push("/editProfile")}
+            className="bg-white p-5 rounded-3xl mb-3 flex-row items-center justify-between border border-slate-50">
             <View className="flex-row items-center">
               <View className="bg-slate-100 p-2 rounded-xl mr-4">
                 <Ionicons name="person-outline" size={20} color="#64748b" />
