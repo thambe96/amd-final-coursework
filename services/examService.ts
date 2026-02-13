@@ -104,3 +104,26 @@ export const deleteExam = async (examId: string) => {
   const examRef = doc(db, "exams", examId);
   return await deleteDoc(examRef);
 };
+
+
+
+
+// Create a new note
+export const createNote = async (examId: string, title: string, content: string) => {
+  const notesRef = collection(db, "exams", examId, "notes");
+  return await addDoc(notesRef, {
+    title,
+    content,
+    createdAt: serverTimestamp(),
+    lastUpdated: serverTimestamp()
+  });
+};
+
+// Update an existing note
+export const updateNote = async (examId: string, noteId: string, content: string) => {
+  const noteRef = doc(db, "exams", examId, "notes", noteId);
+  return await updateDoc(noteRef, {
+    content,
+    lastUpdated: serverTimestamp()
+  });
+};
