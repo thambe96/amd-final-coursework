@@ -4,6 +4,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { db } from '../services/firebase';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { ScreenHeader } from '../components/commonHeader';
 
 const FlashcardSetsScreen = () => {
   const { examId, title } = useLocalSearchParams<{ examId: string, title: string }>();
@@ -65,10 +66,12 @@ const FlashcardSetsScreen = () => {
   return (
     <View className="flex-1 bg-slate-50">
       {/* Custom Header */}
-      <View className="px-6 pt-12 pb-6">
+      {/* <View className="px-6 pt-12 pb-6">
         <Text className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">{title}</Text>
         <Text className="text-3xl font-black text-slate-900">Flashcard Sets</Text>
-      </View>
+      </View> */}
+
+      <ScreenHeader title="Flashcard Sets" subtitle={title as string} />
 
       {loading ? (
         <ActivityIndicator size="large" color="#6366f1" className="mt-10" />

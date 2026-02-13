@@ -2,6 +2,9 @@ import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { ScreenHeader } from '../components/commonHeader';
+
+
 
 const ExamDetailsScreen = () => {
   const { examId, title } = useLocalSearchParams(); // Get the ID from the card click
@@ -35,10 +38,12 @@ const ExamDetailsScreen = () => {
   return (
     <ScrollView className="flex-1 bg-slate-50 p-6">
       {/* Subject Header */}
-      <View className="mb-8 mt-4">
+      {/* <View className="mb-8 mt-4">
         <Text className="text-slate-400 text-sm font-bold uppercase tracking-widest">Subject Hub</Text>
         <Text className="text-3xl font-extrabold text-slate-900">{title || "Exam Details"}</Text>
-      </View>
+      </View> */}
+
+      <ScreenHeader title="Subject Hub" subtitle={title as string} />
 
       {/* Grid Menu */}
       <View className="flex-row flex-wrap justify-between">
