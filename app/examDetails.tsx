@@ -28,7 +28,7 @@ const ExamDetailsScreen = () => {
       icon: 'image', 
       color: 'bg-emerald-50', 
       iconColor: '#10b981', 
-      route: '/attachments' 
+      route: '/imageGallery' 
     },
   ];
 
