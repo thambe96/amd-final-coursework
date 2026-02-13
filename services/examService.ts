@@ -127,3 +127,18 @@ export const updateNote = async (examId: string, noteId: string, content: string
     lastUpdated: serverTimestamp()
   });
 };
+
+
+
+export const addImageToExam = async (examId: string, imageUrl: string, note: string) => {
+  const imagesRef = collection(db, "exams", examId, "images");
+  return await addDoc(imagesRef, {
+    url: imageUrl,
+    note: note,
+    createdAt: serverTimestamp(),
+  });
+};
+
+export const deleteImage = async (examId: string, imageId: string) => {
+  return await deleteDoc(doc(db, "exams", examId, "images", imageId));
+};
