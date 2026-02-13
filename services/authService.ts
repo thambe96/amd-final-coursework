@@ -55,3 +55,15 @@ export const logoutUser = async () => {
   AsyncStorage.clear()
   return
 }
+
+
+export const updateUserProfile = async (displayName: string, photoURL: string) => {
+  const user = auth.currentUser;
+  if (user) {
+    return await updateProfile(user, {
+      displayName: displayName,
+      photoURL: photoURL,
+    });
+  }
+  throw new Error("No user logged in");
+};
