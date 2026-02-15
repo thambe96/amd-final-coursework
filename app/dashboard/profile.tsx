@@ -5,11 +5,13 @@ import { collection, query, where, getCountFromServer } from 'firebase/firestore
 import { signOut } from 'firebase/auth';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { logoutUser } from '@/services/authService';
 
 const ProfileScreen = () => {
   const user = auth.currentUser;
   const router = useRouter();
   const [stats, setStats] = useState({ exams: 0, sets: 0 });
+  
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -27,14 +29,23 @@ const ProfileScreen = () => {
     fetchStats();
   }, []);
 
-  const handleLogout = () => {
-    Alert.alert("Sign Out", "Are you sure you want to log out?", [
-      { text: "Cancel", style: "cancel" },
-      { text: "Log Out", style: "destructive", onPress: () => signOut(auth) }
-    ]);
-  };
+  // const handleLogout = () => {
+  //   Alert.alert("Sign Out", "Are you sure you want to log out?", [
+  //     { text: "Cancel", style: "cancel" },
+  //     { text: "Log Out", style: "destructive", onPress: () =>  
+  //       await logoutUser()
+  //       /*signOut(auth)*/ }
+  //   ]);
+  // };
+
+  const handleLogout = async () => {
+    await logoutUser()
+    router.replace('/login')
+  }
+  
 
   return (
+    
     <ScrollView className="flex-1 bg-slate-50">
       {/* Header / Cover Area */}
       <View className="bg-indigo-600 h-40 w-full" />
@@ -102,7 +113,7 @@ const ProfileScreen = () => {
       </View>
 
       <View className="h-20" /> {/* Spacer for bottom tabs */}
-    </ScrollView>
+    </ScrollView> 
   );
 };
 
